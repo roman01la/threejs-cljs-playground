@@ -10,7 +10,7 @@
 
   var STORAGE = 'THREE_JS_CLJS_STORAGE';
 
-  var DEFAULT_DEFS = "(def THREE (.-THREE js/window))\n(def VIEWPORT (.querySelector js.document \".viewport\"))\n(def WIDTH " + viewport.clientWidth + ")\n(def HEIGHT " + viewport.clientHeight + ")";
+  var DEFAULT_DEFS = "(def RAF)\n(def THREE (.-THREE js/window))\n(def VIEWPORT (.querySelector js.document \".viewport\"))\n(def WIDTH " + viewport.clientWidth + ")\n(def HEIGHT " + viewport.clientHeight + ")";
 
   var editor = CodeMirror(editorContainer, {
     value: localStorage.getItem(STORAGE) || getDefaultValue(),
@@ -25,9 +25,14 @@
 
   editor.setOption('extraKeys', {
     'Alt-Enter': function(instance){
-      evalCljs(instance.getValue(), function beforeEvalAfterCompile() {
-        viewport.innerHTML = '';
-      });
+      if (!cljs.user.RAF) {
+        showError(123);
+      } else {
+        cancelAnimationFrame(cljs.user.RAF);
+        evalCljs(instance.getValue(), function beforeEvalAfterCompile() {
+          viewport.innerHTML = '';
+        });
+      }
     }
   });
 
@@ -48,6 +53,11 @@
         eval(output);
       }
     });
+  }
+
+  function showError() {
+
+     alert('Assign requestAnimationFrame ID to global RAF variable and reload: (set! RAF (js/requestAnimationFrame render))');
   }
 
   function getDefaultValue() {
