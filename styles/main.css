@@ -32,3 +32,10 @@ body {
   top: 0;
   right: 0;
 }
+
+.gh-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+}
