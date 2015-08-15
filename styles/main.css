@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.editor {
+  width: 50vw;
+  position: relative;
+}
+
+.editor .CodeMirror {
+  height: 100vh;
+}
+
+.resizer {
+  width: 4px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: -4px;
+}
+
+.resizer:hover {
+  cursor: col-resize;
+  border-right: 1px dashed #fff;
+}
+
+.viewport {
+  width: 50vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

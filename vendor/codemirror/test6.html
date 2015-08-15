@@ -1,0 +1,36 @@
+<!doctype html>
+
+<script src="lib/codemirror.js"></script>
+<link rel=stylesheet href="lib/codemirror.css">
+
+<style>
+  .CodeMirror { height: 100% }
+  body, html { margin: 0; padding: 0 }
+</style>
+
+<script>
+ // cm = CodeMirror(document.body, {value: new Array(1000).join("a\n"), lineNumbers: true})
+
+  function e_button(e) {
+    var b = e.which;
+    if (b == null) {
+      if (e.button & 1) b = 1;
+      else if (e.button & 2) b = 3;
+      else if (e.button & 4) b = 2;
+    }
+    return b;
+  }
+
+window.onmousedown = function(e) {
+  document.body.style.background = "red"
+  window.addEventListener("mousemove", function move(e) {
+ console.log(e.buttons)
+    if (e.buttons == 0) {
+      window.removeEventListener("mousemove", move);
+      document.body.style.background = "";
+    }
+  })
+}
+
+
+</script>

@@ -1,0 +1,36 @@
+<!doctype html>
+
+<meta name="viewport" content="width=device-width">
+
+<meta charset="utf-8">
+<script src="lib/codemirror.js"></script>
+<link rel=stylesheet href="lib/codemirror.css">
+
+<script>
+  var s = document.createElement("script");
+  s.src="http://" + document.location.hostname + ":8080/target/target-script-min.js#anonymous";
+  document.head.appendChild(s);
+  window._log = [];
+  window.onerror = function(msg, url, line) {
+    window._log.push(msg);
+    console.log("!! Got error:", msg, url, line);
+  };
+  function log() {
+    var args = Array.prototype.slice.call(arguments);
+    if (!args.length) {
+      for (var i = 0; i < window._log.length; i++)
+        console.log(window._log[i]);
+    } else {
+      window._log.push(args.length > 1 ? args : args[0]);
+    }
+  }
+</script>
+
+<body>
+
+<script>
+var cm = new CodeMirror(document.body, {value: "one\ntwo\nthree"});
+cm.execCommand("selectAll");
+cm.focus();
+
+</script>

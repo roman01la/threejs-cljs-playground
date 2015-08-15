@@ -1,0 +1,18 @@
+<!doctype html>
+ 
+<meta charset="utf-8"/>
+ 
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="lib/codemirror.js"></script>
+
+<body>
+
+<script>
+var cm = CodeMirror(document.body, {value: "hello onbe two"});
+document.body.addEventListener("contextmenu", function() {
+  var word = cm.findWordAt(cm.getCursor());
+  cm.setSelection(word.anchor, word.head);
+});
+</script>
+
+</body>

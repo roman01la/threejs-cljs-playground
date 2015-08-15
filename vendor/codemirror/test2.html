@@ -1,0 +1,36 @@
+<!doctype html>
+ 
+<meta charset="utf-8"/>
+
+
+<link rel="stylesheet" href="lib/codemirror.css">
+<script src="lib/codemirror.js"></script>
+
+    <style>
+    body {
+        width: 200px;
+    }
+    .CodeMirror {
+        height: auto;
+        border: 1px solid red;
+    }
+    </style>
+
+
+    <textarea id="myTextArea">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+blah</textarea>
+
+    <script>
+         var myTextArea = document.getElementById('myTextArea')
+
+        var cm = CodeMirror.fromTextArea(myTextArea, {
+            lineWrapping: true
+        })
+
+        console.log(cm.cursorCoords({line: 1, ch: 0}).top)
+
+        cm.on('change', function (instance, changeObj) {
+            console.log(cm.cursorCoords({line: 1, ch: 0}).top)
+        })
+     </script>
+ 
