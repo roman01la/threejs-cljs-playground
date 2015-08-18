@@ -8,14 +8,17 @@
   var objBtn = document.querySelector('.obj-btn');
   var colladaFile = document.querySelector('.collada-file');
   var colladaBtn = document.querySelector('.collada-btn');
+  var textureFile = document.querySelector('.texture-file');
+  var textureBtn = document.querySelector('.texture-btn');
 
   document.querySelector('.upload-btn')
     .addEventListener('click', function() {
       loadBar.hidden = !loadBar.hidden;
     }, false);
 
-  objFile.addEventListener('change', readFile.bind(null, parseOBJ), false);
-  colladaFile.addEventListener('change', readFile.bind(null, parseCollada), false);
+  objFile.addEventListener('change', readFile.bind(null, parseOBJ, 'text'), false);
+  colladaFile.addEventListener('change', readFile.bind(null, parseCollada, 'text'), false);
+  textureFile.addEventListener('change', readFile.bind(null, loadTexture, 'url'), false);
 
   objBtn.addEventListener('click', function() {
     objFile.click();
@@ -25,12 +28,20 @@
     colladaFile.click();
   }, false);
 
-  function readFile(callback, event) {
+  textureBtn.addEventListener('click', function() {
+    textureFile.click();
+  }, false);
+
+  function readFile(callback, format, event) {
     var reader = new FileReader();
     reader.addEventListener('loadend', function(ent) {
       callback(ent.target.result);
     }, false);
-    reader.readAsText(event.target.files[0]);
+    if (format === 'text') {
+      reader.readAsText(event.target.files[0]);
+    } else if (format === 'url') {
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   function parseOBJ(data) {
@@ -47,6 +58,17 @@
       cljs.user.MODELS_DATA.push({ type: 'collada', data: xmlData });
       cljs.user.MODELS.push({ type: 'collada', data: model });
     });
+  }
+
+  function loadTexture(url) {
+    var img = document.createElement('img');
+    img.addEventListener('load', function() {
+      var texture = new THREE.Texture(img);
+      texture.needsUpdate = true;
+      cljs.user.TEXTURES_DATA.push(img);
+      cljs.user.TEXTURES.push(texture);
+    }, false);
+    img.src = url;
   }
 
 })(window);
