@@ -44,18 +44,15 @@
   });
 
   editor.setOption('extraKeys', {
-    'Alt-Enter': function(instance){
-      cancelAnimationFrame(cljs.user.RAF);
-      evalCljs(getDefaultDefs() + instance.getValue(), function beforeEvalAfterCompile() {
-        cljs.user = null;
-        viewport.innerHTML = '';
-      });
-    }
+    'Alt-Enter': evalChange
   });
 
   editor.on('change', function(instance) {
     localStorage.setItem(STORAGE, instance.getValue());
   });
+
+  document.querySelector('.eval-btn')
+    .addEventListener('click', evalChange, false);
 
   if (scope.location.hash) {
     scope.remote.get(scope.location.hash.match(/#(.*)/)[1])
@@ -70,6 +67,14 @@
   } else {
     editor.setValue(localStorage.getItem(STORAGE) || getDefaultValue());
     evalEditorCode();
+  }
+
+  function evalChange() {
+    cancelAnimationFrame(cljs.user.RAF);
+    evalCljs(getDefaultDefs() + editor.getValue(), function beforeEvalAfterCompile() {
+      cljs.user = null;
+      viewport.innerHTML = '';
+    });
   }
 
   function evalEditorCode() {
