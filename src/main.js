@@ -93,7 +93,7 @@
   document.querySelector('.share')
     .addEventListener('click', function() {
       var btn = this;
-      scope.remote.set(editor.getValue())
+      scope.remote.set(scope.location.hash && scope.location.hash.match(/#(.*)/)[1], editor.getValue())
         .then(function(id) {
           scope.location.hash = id;
           btn.innerHTML = 'Saved! Copy URL from the address bar.'

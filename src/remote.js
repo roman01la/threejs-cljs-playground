@@ -14,11 +14,17 @@
       });
     },
 
-    set: function(code) {
+    set: function(hid, code) {
       return new Promise(function(resolve, reject) {
-        var id = guid();
+        var id = hid || guid();
         remote.child('sheets/' + id).set(code, function(err) {
-          if (err) { return reject(err); }
+          if (err) {
+            var nid = guid();
+            remote.child('sheets/' + nid).set(code, function(err) {
+              if (err) { return reject(err); }
+              resolve(nid);
+            });
+          }
           resolve(id);
         });
       });
