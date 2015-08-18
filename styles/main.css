@@ -20,6 +20,33 @@ body {
   right: 0;
 }
 
+.toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  font-family: sans-serif;
+  padding: 0 0 0 10px;
+}
+
+.toolbar ul {
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  border-radius: 0;
+  border: none;
+  background-color: #fff;
+  padding: 10px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #ccc;
+}
+
 .gh-link {
   position: absolute;
   bottom: 0;
