@@ -10,15 +10,17 @@
 
   var STORAGE = 'THREE_JS_CLJS_STORAGE';
 
-  var DEFAULT_DEFS = "(ns cljs.user)\n(def RAF)\n(def MODELS #js [])\n(def THREE (.-THREE js/window))\n(def VIEWPORT (.querySelector js.document \".viewport\"))\n(def WIDTH " + viewport.clientWidth + ")\n(def HEIGHT " + viewport.clientHeight + ")";
+  var DEFAULT_DEFS = "(ns cljs.user)\n(def RAF)\n(def THREE (.-THREE js/window))\n(def MODELS_DATA #js [])\n(def MODELS #js [])\n(def VIEWPORT (.querySelector js.document \".viewport\"))\n(def WIDTH " + viewport.clientWidth + ")\n(def HEIGHT " + viewport.clientHeight + ")";
 
   function getDefaultDefs() {
 
-    var defs = DEFAULT_DEFS, models;
+    var defs = DEFAULT_DEFS;
 
-    if (cljs.user.MODELS && cljs.user.MODELS.length) {
-      scope._models = cljs.user.MODELS;
-      defs = defs.replace(/\n\(def MODELS \#js \[\]\)/, '(def MODELS (.-_models js/window))');
+    if (cljs.user.MODELS_DATA && cljs.user.MODELS_DATA.length) {
+      scope._modelsData = cljs.user.MODELS_DATA;
+      defs = defs.replace(/\n\(def MODELS_DATA \#js \[\]\)/, '(def MODELS_DATA (.-_modelsData js/window))');
+      var loop = '(loop [i (js/Number. "0") arr MODELS_DATA] (when (< i (js/Number. (.-length arr))) (.push MODELS (.parse THREE.OBJLoader.prototype (aget arr i))) (recur (inc i) arr)))'
+      defs = defs.replace(/\n\(def MODELS \#js \[\]\)/, '(def MODELS #js [])' + loop);
     }
 
     return defs;
@@ -74,7 +76,11 @@
         console.error(err);
       } else {
         preEvalCallback && preEvalCallback();
-        eval(output);
+        try {
+          eval(output);
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
   }

@@ -14,6 +14,7 @@ function readOBJ(callback, event) {
 }
 
 function parseOBJ(data) {
+  cljs.user.MODELS_DATA.push(data);
   cljs.user.MODELS.push(THREE.OBJLoader.prototype.parse(data));
 }
 
