@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>three.js in ClojureScript playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css">
   <link rel="stylesheet" href="vendor/codemirror/theme/neo.css">
   <link rel="stylesheet" href="styles/main.css">
@@ -13,9 +14,9 @@
   <div class="editor"></div>
   <div class="toolbar">
     <ul class="list">
-      <li class="list-item" style="background:#fff;padding:0 0 0 10px;">
-        <label for="obj">OBJ</label>
-        <input class="btn obj-file" type="file" id="obj">
+      <li class="list-item">
+        <button class="btn obj-btn">OBJ</button>
+        <input class="btn obj-file" type="file" id="obj" hidden>
       </li>
       <li class="list-item">
         <button class="btn share">Share</button>

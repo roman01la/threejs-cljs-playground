@@ -22,17 +22,24 @@ body {
 
 .toolbar {
   position: absolute;
-  top: 0;
-  right: 0;
+  bottom: 0;
+  left: 0;
   font-family: sans-serif;
-  padding: 0 0 0 10px;
   text-align: right;
+  background: #fff;
+  z-index: 6;
+  width: 50vw;
+  border-top: 1px dashed #ccc;
 }
 
 .toolbar ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.list-item {
+  display: inline-block;
 }
 
 .btn {
@@ -47,6 +54,7 @@ body {
 .btn:hover {
   background: #ccc;
 }
+
 
 .gh-link {
   position: absolute;
