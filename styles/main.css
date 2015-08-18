@@ -24,9 +24,9 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #fff;
   font-family: sans-serif;
   padding: 0 0 0 10px;
+  text-align: right;
 }
 
 .toolbar ul {
