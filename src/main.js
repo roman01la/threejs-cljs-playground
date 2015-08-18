@@ -19,7 +19,7 @@
     if (cljs.user.MODELS_DATA && cljs.user.MODELS_DATA.length) {
       scope._modelsData = cljs.user.MODELS_DATA;
       defs = defs.replace(/\n\(def MODELS_DATA \#js \[\]\)/, '(def MODELS_DATA (.-_modelsData js/window))');
-      var loop = '(loop [i (js/Number. "0") arr MODELS_DATA] (when (< i (js/Number. (.-length arr))) (.push MODELS (.parse THREE.OBJLoader.prototype (aget arr i))) (recur (inc i) arr)))'
+      var loop = "(loop [i (js/Number. \"0\") arr MODELS_DATA]\n  (when (< i (js/Number. (.-length arr)))\n    (let [data (aget arr i)]\n      (case (.-type data)\n        \"obj\" (.push MODELS (.parse THREE.OBJLoader.prototype (.-data data)))\n        \"collada\" (.parse (THREE.ColladaLoader.) (.-data data)\n                    (fn [model]\n                      (.push MODELS model)))))\n    (recur (inc i) arr)))";
       defs = defs.replace(/\n\(def MODELS \#js \[\]\)/, '(def MODELS #js [])' + loop);
     }
 

@@ -9,7 +9,7 @@ body {
 }
 
 .editor .CodeMirror {
-  height: 100vh;
+  height: calc(100vh - 34px);
 }
 
 .viewport {
@@ -20,9 +20,8 @@ body {
   right: 0;
 }
 
-.toolbar {
+.bar {
   position: absolute;
-  bottom: 0;
   left: 0;
   font-family: sans-serif;
   text-align: right;
@@ -32,7 +31,15 @@ body {
   border-top: 1px dashed #ccc;
 }
 
-.toolbar ul {
+.toolbar {
+  bottom: 0;
+}
+
+.load-bar {
+  bottom: 34px;
+}
+
+.list {
   margin: 0;
   padding: 0;
   list-style: none;
