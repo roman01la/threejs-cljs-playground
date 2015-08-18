@@ -15,6 +15,13 @@ After every evaluation the namespace is populated with the following vars:
 - `MODELS_DATA` — JS array with parsed models data to be compiled and stored into `MODELS`
 - `TEXTURES` — JS array with compiled textures
 - `TEXTURES_DATA` — JS array with images to be compiled and stored into `TEXTURES`
+- `RENDERER` & `CAMERA` — assign your renderer and camera instances to these vars to let me handle window resizing for you...
+
+```clojurescript
+(set! RENDERER renderer)
+(set! CAMERA camera)
+```
+
 - `RAF` — ID of the current `requestAnimationFrame` call, this is the important one...
 
 Make sure you are always assigning returning value of `requestAnimationFrame` call to global `RAF` var, like this:
