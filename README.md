@@ -1,5 +1,6 @@
 # three.js playground in ClojureScript
 
+<img src="logo.png" width="200" height="200" style="display:block;margin:0 auto;"/>
 ![demo](screenshot.png)
 
 The playground is running on bootstrapped ClojureScript and stores shared demos on Firebase.
