@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.editor {
+  width: 50vw;
+  position: relative;
+}
+
+.editor .CodeMirror {
+  height: calc(100vh - 34px);
+}
+
+.viewport {
+  width: 50vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  font-family: sans-serif;
+  text-align: right;
+  background: #fff;
+  z-index: 6;
+  width: 50vw;
+  border-top: 1px dashed #ccc;
+}
+
+.toolbar {
+  bottom: 0;
+  height: 34px;
+}
+
+.load-bar {
+  bottom: 34px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list.left {
+  float: left;
+}
+
+.list-item {
+  display: inline-block;
+}
+
+.btn {
+  border-radius: 0;
+  border: none;
+  background-color: #fff;
+  padding: 10px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #ccc;
+}
+
+
+.gh-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+}
