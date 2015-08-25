@@ -12,20 +12,23 @@
 (def texture-input (js/document.querySelector ".texture-file"))
 (def texture-btn (js/document.querySelector ".texture-btn"))
 
+(defn push-into-ns [prop value]
+  (.push (aget (.. js/window -cljs -user) prop) value))
+
 (defn toggle-loader-bar []
   (set! (.. loader-bar -hidden) (not (.. loader-bar -hidden))))
 
 (defn add-model [model type]
-  (.push (.. js/window -cljs -user -MODELS) #js {"type" type "data" model}))
+  (push-into-ns "MODELS" #js {"type" type "data" model}))
 
 (defn add-raw-model [data type]
-  (.push (.. js/window -cljs -user -MODELS_DATA) #js {"type" type "data" data}))
+  (push-into-ns "MODELS_DATA" #js {"type" type "data" data}))
 
 (defn add-texture [texture]
-  (.push (.. js/window -cljs -user -TEXTURES) texture))
+  (push-into-ns "TEXTURES" texture))
 
 (defn add-raw-texture [raw-texture]
-  (.push (.. js/window -cljs -user -TEXTURES_DATA) raw-texture))
+  (push-into-ns "TEXTURES_DATA" raw-texture))
 
 (defn build-dom-fragment [s]
   (let [fragment (js/document.createElement "div")]

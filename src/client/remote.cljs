@@ -1,4 +1,5 @@
-(ns client.remote)
+(ns client.remote
+  (:require [cljsjs.firebase]))
 
 (def remote (js/Firebase. "https://cljs-three-pg.firebaseio.com/"))
 (def user (atom nil))

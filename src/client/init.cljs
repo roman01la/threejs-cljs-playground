@@ -1,7 +1,14 @@
 (ns client.init
   (:require [client.compiler :refer [eval-expr]]
             [client.user]
-            [client.utils :as utils]))
+            [client.utils :as utils]
+            [cljsjs.codemirror.mode.clojure]
+            [cljsjs.codemirror.addons.active-line]
+            [cljsjs.codemirror.addons.matchbrackets]
+            [cljsjs.codemirror.addons.closebrackets]
+            [cljsjs.three.obj-loader]
+            [cljsjs.three.collada-loader]
+            [cljsjs.three.texture-loader]))
 
 (def viewport (js/document.querySelector ".viewport"))
 (def editor-container (js/document.querySelector ".editor"))
@@ -29,7 +36,7 @@
   (aset js/window to (or (get-from-ns from) #js [])))
 
 (defn reset-sandbox []
-  (js/cancelAnimationFrame (.. cljs.user -RAF))
+  (js/cancelAnimationFrame (get-from-ns "RAF"))
   (cache-from-ns "MODELS_DATA" "modelsData")
   (cache-from-ns "TEXTURES_DATA" "texturesData")
   (reset-ns)
@@ -38,11 +45,11 @@
 (defn update-viewport-size [w h]
   (set-to-ns "WIDTH" w)
   (set-to-ns "HEIGHT" h)
-  (if-let [r js/cljs.user.RENDERER]
+  (if-let [r (get-from-ns "RENDERER")]
     (.setSize r w h)))
 
 (defn update-aspect-ratio [w h]
-  (if-let [c js/window.cljs.user.CAMERA]
+  (if-let [c (get-from-ns "CAMERA")]
     (do
       (set! (.. c -aspect) (/ w h))
       (.updateProjectionMatrix c))))
