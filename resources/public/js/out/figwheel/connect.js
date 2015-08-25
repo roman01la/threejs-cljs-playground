@@ -1,9 +1,9 @@
-// Compiled by ClojureScript 1.7.28 {}
+// Compiled by ClojureScript 1.7.28 {:static-fns true, :optimize-constants true}
 goog.provide('figwheel.connect');
 goog.require('cljs.core');
-goog.require('threejs_cljs_pg.core');
+goog.require('client.core');
 goog.require('figwheel.client');
 goog.require('figwheel.client.utils');
-figwheel.client.start.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"build-id","build-id",1642831089),"dev",new cljs.core.Keyword(null,"websocket-url","websocket-url",-490444938),"ws://localhost:3000/figwheel-ws"], null));
+figwheel.client.start.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 2, [cljs.core.constant$keyword$build_DASH_id,"dev",cljs.core.constant$keyword$websocket_DASH_url,"ws://localhost:3000/figwheel-ws"], null));
 
-//# sourceMappingURL=connect.js.map?rel=1440250706867
+//# sourceMappingURL=connect.js.map?rel=1440458062277

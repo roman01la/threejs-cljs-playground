@@ -1,2 +1,0 @@
-;; Analyzed by ClojureScript 1.7.28
-{:name threejs-cljs-pg.core, :doc nil, :excludes #{}, :use-macros nil, :require-macros nil, :uses {initialize threejs-cljs-pg.init}, :requires {threejs-cljs-pg.init threejs-cljs-pg.init, threejs-cljs-pg.loader threejs-cljs-pg.loader}, :imports nil}
