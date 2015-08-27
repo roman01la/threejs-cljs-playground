@@ -1,14 +1,21 @@
 (defproject threejs-cljs-pg "1.0.0"
   :description "three.js playground in ClojureScript"
-  :dependencies [[org.clojure/clojure         "1.7.0"]
-                 [org.clojure/clojurescript   "1.7.28"]
-                 [secretary                   "1.2.3"]
-                 [cljsjs/codemirror           "5.6.0-0"]
-                 [cljsjs/three                "0.0.70-0"]
-                 [cljsjs/firebase             "2.2.7-1"]]
+  :dependencies [[org.clojure/clojure          "1.7.0"]
+                 [org.clojure/clojurescript    "1.7.28"]
+                 [org.clojure/core.async       "0.1.346.0-17112a-alpha"]
+                 [org.omcljs/om                "0.9.0"]
+                 [secretary                    "1.2.3"]
+                 [cljsjs/codemirror            "5.6.0-0"]
+                 [cljsjs/three                 "0.0.70-0"]
+                 [cljsjs/firebase              "2.2.7-1"]]
 
   :plugins [[lein-cljsbuild "1.0.6"]
             [lein-figwheel  "0.3.7"]]
+
+  :source-paths ["src/cljs"]
+  :resource-paths ["resources"]
+  :clean-targets ^{:protect false} ["resources/public/js/out"
+                                    "resources/public/js/app.js"]
 
   :figwheel
   {:server-port 3000
@@ -17,7 +24,7 @@
   :cljsbuild
   {:builds {
     :dev {
-      :source-paths ["src"]
+      :source-paths ["src/cljs"]
       :figwheel true
       :compiler {:optimizations :none
                  :main client.core

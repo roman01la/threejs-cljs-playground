@@ -67,6 +67,9 @@ body {
   background: #ccc;
 }
 
+label {
+  font: normal normal normal normal 11px/normal '.HelveticaNeueDeskInterface-Regular';
+}
 
 .gh-link {
   position: absolute;
