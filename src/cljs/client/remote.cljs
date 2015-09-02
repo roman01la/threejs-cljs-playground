@@ -58,7 +58,7 @@
     (if (nil? uuid)
       (let [did (guid)]
         (.set (f-child remote "sheets" did)
-          code
+          #js {"code" code "timestamp" (js/Date.now)}
           #(cb {:did did :uid nil :rev nil})))
       (set-demo cb code {:uuid uuid} (guid))))
   ([cb code {:keys [uuid]} did]
@@ -66,7 +66,7 @@
       (nil? uuid)
         (let [ndid (guid)]
           (.set (f-child remote "sheets" ndid)
-            code
+            #js {"code" code "timestamp" (js/Date.now)}
             #(cb {:did ndid :uid nil :rev nil})))
       (not (nil? uuid))
         (set-demo cb code {:uuid uuid} did uuid)))
@@ -80,7 +80,7 @@
       (and (not (nil? uuid)) (= uuid uid))
         (let [nrev (inc (js/parseInt rev))]
           (.set (f-child remote "users" uid "sheets" did nrev)
-            code
+            #js {"code" code "timestamp" (js/Date.now)}
             #(cb {:did did :uid uid :rev nrev})))
       (and (nil? uuid) (not (nil? uid)))
         (set-demo cb code nil)
@@ -90,7 +90,7 @@
 (defn get-demo
   ([cb did]
     (.once
-      (f-child remote "sheets" did)
+      (f-child remote "sheets" did "code")
       "value"
       #(cb {:code (.val %) :page {:did did}})))
   ([cb did uid]
@@ -101,7 +101,7 @@
   ([cb did uid rev]
     (let [nrev (js/parseInt rev)]
       (.once
-        (f-child remote "users" uid "sheets" did nrev)
+        (f-child remote "users" uid "sheets" did nrev "code")
         "value"
         #(cb {:code (.val %) :page {:did did :uid uid :rev nrev}})))))
 
